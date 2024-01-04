@@ -1,0 +1,14 @@
+# General 
+  color info							color8	default 
+  color listfocus					default	blue 
+  color listfocus_unread	default blue	  bold
+  search-highlight-colors white		cyan		bold
+
+# Feeds
+  highlight feedlist "[║│]" default default bold
+  highlight feedlist "╠═.*" default default bold
+  feedlist-format "%?T?║%4i %n %8u %t (%T) &╠#%-8t════════════════════════════════════════?"
+
+# Articles
+  highlight article "^(Feed|Title|Link|Date|Author):.*$" color12 default 
+  highlight article "https?://[^ ]+" color14 default protect

@@ -1,0 +1,11 @@
+export EDITOR=/usr/bin/nvim          # Default editor
+export VISUAL=/usr/bin/nvim          # Default editor
+export HISTSIZE=10000                # Elements saved in history
+export HISTCONTROL=ignoredups        # Ignores duplicate commands
+export _JAVA_AWT_WM_NONREPARENTING=1 # For java programs in DWM
+export AWT_TOOLKIT=MToolkit
+export JDTLS_HOME=$HOME/.local/share/nvim/site/pack/packer/start/nvim-jdtls
+export ZDOTDIR=$HOME/.config/zsh
+export TERM=xterm-256color
+export GOPATH=/home/mario/.local/share/go
+PATH="$PATH:~/.bin:~/.local/bin:$(go env GOPATH)/bin" # Local path and go path

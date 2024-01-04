@@ -1,0 +1,14 @@
+# Newsboat config
+	include binds		
+	include colors
+	include macros
+
+# General
+  auto-reload       no
+  reload-threads    75  # Threads used when reloading
+  max-items         100
+  reload-time       0   # Auto-update time in minutes
+  show-keymap-hint  no  # Removes suggestions
+  history-limit     0   # Disables history
+  notify-program    "/usr/bin/notify-send"
+  prepopulate-query-feeds yes # Sync queryfeeds with normal feeds

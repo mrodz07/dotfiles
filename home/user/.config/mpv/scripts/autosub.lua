@@ -1,0 +1,1 @@
+/home/mario/Repos/public/mpv-autosub/autosub.lua

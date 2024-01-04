@@ -1,0 +1,84 @@
+#! /bin/sh
+
+PRIMARY_MONITOR="HDMI-A-0"
+SECONDARY_MONITOR="DisplayPort-1-3"
+
+pgrep -x sxhkd >/dev/null || sxhkd &
+
+sh ~/.screenlayout/monitor.sh &
+
+sleep 2
+
+bspc monitor $PRIMARY_MONITOR -d I II III IV V
+bspc monitor $SECONDARY_MONITOR -d VI VII VIII IX X
+
+bspc config border_width 2
+bspc config window_gap 12
+
+bspc config split_ratio 0.52
+bspc config borderless_monocle true
+bspc config gapless_monocle true
+bspc config pointer_follows_focus true
+bspc config focus_follows_pointer true
+# Ignores windows wanting focus
+bspc config ignore_ewmh_focus true
+
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a LibreWolf desktop='^3'
+bspc rule -a mpv state=tiled desktop='^6'
+bspc rule -a Zathura state=tiled
+bspc rule -a Rofi focus=on
+bspc rule -a Screenkey manage=off
+bspc rule -a LibreWolfChats desktop='^10'
+bspc rule -a Rhythmbox desktop='^8'
+bspc rule -a nvim desktop='^2' state=tiled
+bspc rule -a electron-mail desktop='^9'
+bspc rule -a whatsie desktop='^9'
+
+bspc rule -a steam desktop='^5' follow=no
+bspc rule -a cs2 state=fullscreen desktop='^5'
+bspc rule -a hl2_linux desktop='^5' follow=no
+
+# Border
+bspc config focused_border_color "#6c71c4"
+bspc config normal_border_color "#073642"
+bspc config active_border_color "#073642"
+
+#
+# Autostart
+#
+# Set display from arandr saved script
+# Enforce monitor positions
+pgrep -x enforce_monitor_position >/dev/null || ~/.config/bspwm/scripts/enforce_monitor_position.sh $PRIMARY_MONITOR '^1' &
+# Polkit
+pgrep -x polkitd >/dev/null || usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# Picom
+pgrep -x picom >/dev/null || picom -b &
+# Bar
+pgrep -x polybar >/dev/null || ~/.config/polybar/launch.sh &
+# Wallpaper
+pgrep -x nitrogen >/dev/null || nitrogen --restore &
+# Notifications
+pgrep -x dunst >/dev/null || usr/bin/dunst &
+# Network Applet
+pgrep -x nm-applet >/dev/null || nm-applet --indicator &
+# Dex
+dex -a -s /etc/xdg/autostart/:~/.config/autostart/ &
+# Cursor
+pgrep -x xsetroot >/dev/null || xsetroot -cursor_name left_ptr &
+# Unclutter
+pgrep -x unclutter >/dev/null || unclutter &
+# Librewolf
+pgrep -f 'librewolf -p default' >/dev/null || sleep 1 && dex /usr/share/applications/librewolf.desktop &
+# Librewolf chat
+# pgrep -f 'librewolf -p chats' >/dev/null || sleep 1 && dex ~/.local/share/applications/librewolf-chats.desktop &
+# Whatsapp
+pgrep -f 'whatsie' >/dev/null || sleep 1 && dex /usr/share/applications/com.ktechpit.whatsie.desktop &
+# Automatic Terminal
+kitty &
+# Neovim
+# pgrep -x nvim >/dev/null || sleep 1 && kitty --class nvim -e nvim &
+# Rhythm box
+pgrep -x rhythmbox >/dev/null || rhythmbox &
+# ElectronMail
+pgrep electron-mail >/dev/null || electron-mail &
