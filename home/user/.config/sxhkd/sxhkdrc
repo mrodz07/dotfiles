@@ -146,15 +146,18 @@ super + {Left,Down,Up,Right}
 #
 
 # Multimedia keys
-XF86AudioRaiseVolume
+# XF86AudioRaiseVolume
+super + equal
   amixer -q set Master 5%+ unmute
 
 # Still multimedia
-XF86AudioLowerVolume
+# XF86AudioLowerVolume
+super + minus
   amixer -q set Master 5%- unmute
 
-# still
-XF86AudioMute
+# Mute
+# XF86AudioMute
+super + shift + m
   amixer -D pulse sset Master toggle-mute
   
 # amixer -q set Master toggle
@@ -189,9 +192,3 @@ super + shift + p
 
 ctrl + alt + f
   librewolf
-
-ctrl + alt + w 
-  firefox
-
-super + F1
-  ~/.config/bspwm/scripts/keybindings_rofi.sh
